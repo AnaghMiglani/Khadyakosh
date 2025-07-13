@@ -6,8 +6,8 @@
     {
       "type": "wokwi-dht22",
       "id": "dht",
-      "top": 259.5,
-      "left": -207,
+      "top": 211.5,
+      "left": -264.6,
       "attrs": { "temperature": "30", "humidity": "71.5" }
     },
     {
@@ -20,7 +20,7 @@
     {
       "type": "wokwi-lcd2004",
       "id": "lcd1",
-      "top": -222.44,
+      "top": -270.44,
       "left": -224,
       "attrs": {}
     },
@@ -36,9 +36,19 @@
   "connections": [
     ["esp:TX", "$serialMonitor:RX", "", []],
     ["esp:RX", "$serialMonitor:TX", "", []],
+
     ["chip1:A0", "esp:4", "green", ["h0"]],
     ["esp:GND.2", "chip1:GND", "black", ["v0", "h9.6", "v105.6"]],
-    ["esp:5V", "chip1:VCC", "red", ["h0.15", "v19.2", "h115.2", "v-96"]]
+    ["esp:5V", "chip1:VCC", "red", ["h0.15", "v19.2", "h115.2", "v-96"]],
+
+    ["dht:VCC", "esp:5V", "red", ["v0", "h140"]],
+    ["dht:GND", "esp:GND.2", "black", ["v19.2", "h201.6", "v0", "h48"]],
+    ["dht:SIG", "esp:15", "yellow", ["v0", "h153.6", "v-96"]],
+
+    ["lcd1:GND", "esp:GND.1", "black", ["v0", "h48"]],
+    ["lcd1:VCC", "esp:5V", "red", ["v0", "h96"]],
+    ["lcd1:SDA", "esp:21", "blue", ["v0", "h76.8"]],
+    ["lcd1:SCL", "esp:22", "purple", ["v0", "h57.6"]]
   ],
   "dependencies": {}
 }

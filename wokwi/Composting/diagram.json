@@ -1,0 +1,44 @@
+{
+  "version": 1,
+  "author": "Khadyakosh Simulation",
+  "editor": "wokwi",
+  "parts": [
+    {
+      "type": "wokwi-dht22",
+      "id": "dht",
+      "top": 259.5,
+      "left": -207,
+      "attrs": { "temperature": "30", "humidity": "71.5" }
+    },
+    {
+      "type": "chip-mq135",
+      "id": "chip1",
+      "top": 260.22,
+      "left": 187.2,
+      "attrs": {}
+    },
+    {
+      "type": "wokwi-lcd2004",
+      "id": "lcd1",
+      "top": -222.44,
+      "left": -224,
+      "attrs": {}
+    },
+    {
+      "type": "board-esp32-devkit-c-v4",
+      "id": "esp",
+      "top": 17.54,
+      "left": -92.3,
+      "rotate": 90,
+      "attrs": {}
+    }
+  ],
+  "connections": [
+    ["esp:TX", "$serialMonitor:RX", "", []],
+    ["esp:RX", "$serialMonitor:TX", "", []],
+    ["chip1:A0", "esp:4", "green", ["h0"]],
+    ["esp:GND.2", "chip1:GND", "black", ["v0", "h9.6", "v105.6"]],
+    ["esp:5V", "chip1:VCC", "red", ["h0.15", "v19.2", "h115.2", "v-96"]]
+  ],
+  "dependencies": {}
+}

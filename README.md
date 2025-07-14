@@ -24,9 +24,11 @@
 - IoT-ready architecture with ESP32 and DHT22 + MQ135 sensors
 - Easy-to-deploy backend-free Firebase integration
 
-## Sample of IOT
-
-![Khadyakosh IOT Sample](assets\Khadyakosh_wokwi.gif)
+<h2>Sample of IOT</h2>
+<p align="center">
+  <img src="./assets/Khadyakosh_wokwi.gif" alt="Khadyakosh IOT Sample" width="500">
+</p>
+The current simulation displays gas sensor output in volts, representing raw analog readings. PPM conversion requires calibration with real sensors and is not shown here.
 
 ## 📡 IoT Integration
 

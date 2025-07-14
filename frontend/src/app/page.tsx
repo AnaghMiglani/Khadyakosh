@@ -1,8 +1,7 @@
+import { redirect } from "next/navigation";
 
-export default function Home() {
-  return (
-    <div className="bg-red-100">
-      HI 
-    </div>
-  );
+export default async function Home() {
+ await redirect("/login");
+
+  return <div className="bg-red-100">HI</div>;
 }

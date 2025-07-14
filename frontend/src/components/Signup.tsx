@@ -1,23 +1,24 @@
-import { cn } from "@/lib/utils"
-import { Button } from "@/components/ui/button"
+import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
+} from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import Link from "next/link";
 
 type SignupFormProps = {
-  email: string
-  setEmail: (email: string) => void
-  password: string
-  setPassword: (password: string) => void
-  onSignup: () => void
-  onGoogleSignup: () => void
-} & React.ComponentProps<"div">
+  email: string;
+  setEmail: (email: string) => void;
+  password: string;
+  setPassword: (password: string) => void;
+  onSignup: () => void;
+  onGoogleSignup: () => void;
+} & React.ComponentProps<"div">;
 
 export function SignupForm({
   className,
@@ -30,9 +31,9 @@ export function SignupForm({
   ...props
 }: SignupFormProps) {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    onSignup()
-  }
+    e.preventDefault();
+    onSignup();
+  };
 
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
@@ -79,20 +80,24 @@ export function SignupForm({
                 <Button type="submit" className="w-full">
                   Signup
                 </Button>
-                <Button variant="outline" className="w-full" onClick={onGoogleSignup}>
+                <Button
+                  variant="outline"
+                  className="w-full"
+                  onClick={onGoogleSignup}
+                >
                   Signup with Google
                 </Button>
               </div>
             </div>
             <div className="mt-4 text-center text-sm">
-              Don&apos;t have an account?{" "}
-              <a href="#" className="underline underline-offset-4">
-                Sign up
-              </a>
+              Already have an account ?{" "}
+              <Link className="underline underline-offset-4" href={"/login"}>
+                Login
+              </Link>
             </div>
           </form>
         </CardContent>
       </Card>
     </div>
-  )
+  );
 }

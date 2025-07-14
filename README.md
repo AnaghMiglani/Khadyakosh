@@ -12,7 +12,7 @@ This project is submitted under the _Sustainable Tech & Climate Innovation_ cate
 | **Frontend**| Next.js (React Framework)   |
 | **Auth**    | Firebase Authentication     |
 | **Database**| Firebase Realtime Database  |
-| **IoT Sim** | Wokwi (virtual ESP32 + sensors) |
+| **IoT Simulation** | Wokwi (virtual ESP32 + sensors) |
 | **IoT**     | ESP32 + MQ135 + DHT22       |
 
 ---
@@ -31,8 +31,22 @@ This project is submitted under the _Sustainable Tech & Climate Innovation_ cate
 - The device pushes data to **Firebase Realtime Database** under each user's node.
 - We’ve simulated this setup on [**Wokwi**](https://wokwi.com) for testing without real hardware.
 
-### 🔬 Find the IoT simulation in the `/wokwi` folder.
+### 🔬 IoT Simulation (Wokwi)
 
-You can open the `diagram.json` file in [wokwi.com](https://wokwi.com) to try it instantly.
+You can explore the simulation in the `/wokwi` folder.  
+Open the `diagram.json` file directly in [Wokwi](https://wokwi.com) or run it using the [Wokwi CLI](https://docs.wokwi.com/guides/wokwi-cli).  
+Alternatively, try the live simulation here: [Live Wokwi Project](https://wokwi.com/projects/436373210560617473).
+
+### ⚠️ Note on Wokwi Simulations
+
+Wokwi simulations rely on public servers and may occasionally lag or fail, especially on the **free plan**.
+
+If you face issues:
+- 🔄 Click the **“Start Simulator”** button manually.
+- 🔁 Refresh the page.
+- 💻 Use Chrome for best compatibility.
+- 🧪 Or run it locally using [Wokwi CLI](https://docs.wokwi.com/guides/wokwi-cli).
+
+---
 
 ---

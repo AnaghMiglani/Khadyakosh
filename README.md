@@ -24,15 +24,38 @@
 - IoT-ready architecture with ESP32 and DHT22 + MQ135 sensors
 - Easy-to-deploy backend-free Firebase integration
 
-<h2>Sample of IOT</h2>
+---
+
+<h2>🧪 Sample of IOT</h2>
+
+<h3>🌱 Traditional Composting (DHT22 + MQ135)</h3>
 <p align="center">
-  <img src="./assets/Khadyakosh_wokwi.gif" alt="Khadyakosh IOT Sample" width="500">
+  <img src="./assets/Khadyakosh_wokwi-traditional.gif" alt="Traditional Composting IOT Sample" width="500">
 </p>
-The current simulation displays gas sensor output in volts, representing raw analog readings. PPM conversion requires calibration with real sensors and is not shown here.
+<p align="center">
+  <a href="https://wokwi.com/projects/436373210560617473">🔗 Live Traditional Wokwi Simulation</a>
+</p>
+
+---
+
+<h3>🪱 Vermicomposting (DHT22 + MQ135 + Soil Moisture sensor + LDR)</h3>
+<p align="center">
+  <img src="./assets/Khadyakosh_wokwi-vermi.gif" alt="Vermicomposting IOT Sample" width="500">
+</p>
+<p align="center">
+  <a href="https://wokwi.com/projects/436456472645397505">🔗 Live Vermicompost Wokwi Simulation</a>
+</p>
+
+---
+
+<p> The current simulations displays gas sensor output in volts, representing raw analog readings. PPM conversion requires calibration with real sensors and is not shown here. </p>
+
+---
+
 
 ## 📡 IoT Integration
 
-- We use an **ESP32 microcontroller** connected to DHT22 and MQ135 sensors.
+- We use an **ESP32 microcontroller** connected to DHT22 and MQ135 sensors (traditional) and soil + LDR sensors (vermi).
 - The device pushes data to **Firebase Realtime Database** under each user's node.
 - We’ve simulated this setup on [**Wokwi**](https://wokwi.com) for testing without real hardware.
 
@@ -40,7 +63,7 @@ The current simulation displays gas sensor output in volts, representing raw ana
 
 You can explore the simulation in the `/wokwi` folder.  
 Open the `diagram.json` file directly in [Wokwi](https://wokwi.com) or run it using the [Wokwi CLI](https://docs.wokwi.com/guides/wokwi-cli).  
-Alternatively, try the live simulation here: [Live Wokwi Project](https://wokwi.com/projects/436373210560617473).
+Alternatively, try the live simulations using the links above.
 
 ### ⚠️ Note on Wokwi Simulations
 
@@ -52,7 +75,3 @@ If you face issues:
 - 🔁 Refresh the page.
 - 💻 Use Chrome for best compatibility.
 - 🧪 Or run it locally using [Wokwi CLI](https://docs.wokwi.com/guides/wokwi-cli).
-
----
-
----

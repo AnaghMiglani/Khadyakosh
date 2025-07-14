@@ -23,7 +23,14 @@ const Card: React.FC<CardProps> = ({
       <div className="flex items-center justify-between mb-4">
         <h2 className="text-lg font-semibold text-gray-800">{title}</h2>
         <div className="flex items-center space-x-2 relative group">
-          <span className="text-gray-700 font-medium">{value}</span>
+          <span className="text-gray-700 font-medium">{value}
+            <span>
+            {title === "Gas Level" && " ppm"}
+    {title === "Humidity" && " %"}
+    {title === "Temperature" && " °C"}
+
+            </span>
+          </span>
           <div
             className="w-4 h-4 rounded-full cursor-pointer"
             style={{ backgroundColor: statusColor }}

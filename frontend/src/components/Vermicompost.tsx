@@ -55,7 +55,12 @@ const Vermicompost = () => {
     return () => unsubscribe();
   }, [user]);
 
-  const latest = history[history.length - 1];
+  const latest = history[history.length - 1] ?? {
+    timestamp: 0,
+    gas: 0,
+    humidity: 0,
+    temperature: 0,
+  };
 
   const getStatusInfo = (
     type: "gas" | "humidity" | "temperature",
@@ -65,7 +70,11 @@ const Vermicompost = () => {
       if (value <= 100)
         return { color: "#22c55e", label: "Good", icon: <FiCheckCircle /> };
       if (value <= 200)
-        return { color: "#eab308", label: "Moderate", icon: <FiAlertTriangle /> };
+        return {
+          color: "#eab308",
+          label: "Moderate",
+          icon: <FiAlertTriangle />,
+        };
       return { color: "#ef4444", label: "High", icon: <FiActivity /> };
     }
 
@@ -101,16 +110,31 @@ const Vermicompost = () => {
     }).format(new Date(timestamp));
   };
 
-  if (loading) return <div className="p-10 text-center">⏳ Loading real-time data...</div>;
-  if (error) return <div className="p-10 text-center text-red-500">⚠️ Error: {error.message}</div>;
-  if (!history.length) return <div className="p-10 text-center">📉 No data found.</div>;
+  if (loading)
+    return <div className="p-10 text-center">⏳ Loading real-time data...</div>;
+  if (error)
+    return (
+      <div className="p-10 text-center text-red-500">
+        ⚠️ Error: {error.message}
+      </div>
+    );
 
   return (
     <div className="min-h-screen w-full bg-gray-50">
+      {history.length === 0 && (
+        <div className="w-full max-w-7xl mx-auto px-4 text-center text-gray-600 my-16 mb-12">
+          <strong className="text-6xl"> No data found</strong>
+
+          <p className="text-xl">
+            Please connect your ESP to start receiving real-time sensor
+            readings.
+          </p>
+        </div>
+      )}
       {/* Header */}
       <div className="w-full max-w-7xl mx-auto px-4 py-6 flex justify-between items-center">
         <h1 className="text-3xl font-semibold text-gray-800">
-          🧪 Real-time Vermi-Compost Sensor Dashboard
+          Real-time Vermi-Compost Sensor Dashboard
         </h1>
         <div className="text-sm bg-white shadow px-4 py-2 rounded-lg border text-gray-600">
           <span className="font-medium">Last updated:</span>{" "}
@@ -125,14 +149,22 @@ const Vermicompost = () => {
             title: "Gas Level",
             value: latest.gas,
             type: "gas",
-            suggestions: ["Increase aeration", "Check for odor", "Turn compost pile"],
+            suggestions: [
+              "Increase aeration",
+              "Check for odor",
+              "Turn compost pile",
+            ],
             stroke: "#2260c5",
           },
           {
             title: "Humidity",
             value: latest.humidity,
             type: "humidity",
-            suggestions: ["Add dry material", "Check water content", "Cover compost bin"],
+            suggestions: [
+              "Add dry material",
+              "Check water content",
+              "Cover compost bin",
+            ],
             stroke: "#3b82f6",
           },
           {
@@ -144,13 +176,14 @@ const Vermicompost = () => {
           },
         ].map(({ title, value, type, suggestions, stroke }) => {
           const { color, label, icon } = getStatusInfo(type as any, value);
+          const displaySuggestions = value === 0 ? ["N/A"] : suggestions;
           return (
             <Card
               key={title}
               title={title}
               value={value ?? "N/A"}
               statusColor={color}
-              suggestions={suggestions}
+              suggestions={displaySuggestions}
               statusLabel={
                 <div className="flex items-center gap-2 text-sm justify-center">
                   <span

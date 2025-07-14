@@ -134,7 +134,7 @@ const Compost = () => {
       {/* Header */}
       <div className="w-full max-w-7xl mx-auto px-4 py-6 flex justify-between items-center">
         <h1 className="text-3xl font-semibold text-gray-800">
-          🧪 Real-time Compost Sensor Dashboard
+          Real-time Compost Sensor Dashboard
         </h1>
         <div className="text-sm bg-white shadow px-4 py-2 rounded-lg border text-gray-600">
           <span className="font-medium">Last updated:</span>{" "}
@@ -176,13 +176,14 @@ const Compost = () => {
           },
         ].map(({ title, value, type, suggestions, stroke }) => {
           const { color, label, icon } = getStatusInfo(type as any, value);
+          const displaySuggestions = value === 0 ? ["N/A"] : suggestions;
           return (
             <Card
               key={title}
               title={title}
               value={value ?? "N/A"}
               statusColor={color}
-              suggestions={suggestions}
+              suggestions={displaySuggestions}
               statusLabel={
                 <div className="flex items-center gap-2 text-sm justify-center">
                   <span

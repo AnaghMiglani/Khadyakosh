@@ -16,6 +16,7 @@ type LoginFormProps = {
   password: string
   setPassword: (password: string) => void
   onLogin: () => void
+  onGoogleSignin: () => void
 } & React.ComponentProps<"div">
 
 export function LoginForm({
@@ -25,6 +26,7 @@ export function LoginForm({
   password,
   setPassword,
   onLogin,
+  onGoogleSignin,
   ...props
 }: LoginFormProps) {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -77,7 +79,7 @@ export function LoginForm({
                 <Button type="submit" className="w-full">
                   Login
                 </Button>
-                <Button variant="outline" className="w-full">
+                <Button variant="outline" className="w-full" onClick={onGoogleSignin}>
                   Login with Google
                 </Button>
               </div>

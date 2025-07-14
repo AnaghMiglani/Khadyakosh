@@ -16,6 +16,7 @@ type SignupFormProps = {
   password: string
   setPassword: (password: string) => void
   onSignup: () => void
+  onGoogleSignup: () => void
 } & React.ComponentProps<"div">
 
 export function SignupForm({
@@ -25,6 +26,7 @@ export function SignupForm({
   password,
   setPassword,
   onSignup,
+  onGoogleSignup,
   ...props
 }: SignupFormProps) {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -77,7 +79,7 @@ export function SignupForm({
                 <Button type="submit" className="w-full">
                   Signup
                 </Button>
-                <Button variant="outline" className="w-full">
+                <Button variant="outline" className="w-full" onClick={onGoogleSignup}>
                   Signup with Google
                 </Button>
               </div>

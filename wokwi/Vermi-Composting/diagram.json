@@ -8,12 +8,19 @@
       "id": "dht",
       "top": 211.5,
       "left": -264.6,
-      "attrs": { "temperature": "30", "humidity": "71.5" }
+      "attrs": { "temperature": "79.2", "humidity": "71.5" }
     },
     {
       "type": "chip-mq135",
       "id": "chip1",
       "top": 260.22,
+      "left": 187.2,
+      "attrs": {}
+    },
+    {
+      "type": "chip-soil_sensor",
+      "id": "chip2",
+      "top": 154.62,
       "left": 187.2,
       "attrs": {}
     },
@@ -31,6 +38,14 @@
       "left": -92.3,
       "rotate": 90,
       "attrs": {}
+    },
+    {
+      "type": "wokwi-photoresistor-sensor",
+      "id": "ldr1",
+      "top": -134.7,
+      "left": 148.1,
+      "rotate": 90,
+      "attrs": {}
     }
   ],
   "connections": [
@@ -46,7 +61,13 @@
     ["lcd1:VCC", "esp:5V", "red", ["h-57.6", "v182.5", "h144"]],
     ["lcd1:SDA", "esp:21", "blue", ["v153.8", "h211.2"]],
     ["lcd1:SCL", "esp:22", "purple", ["h-19.2", "v105.9", "h259.2"]],
-    ["dht:SDA", "esp:15", "violet", ["v57.6", "h86.5"]]
+    ["dht:SDA", "esp:15", "violet", ["v57.6", "h86.5"]],
+    ["chip2:GND", "esp:GND.2", "black", ["h-86.4", "v9.6"]],
+    ["chip2:A0", "esp:35", "yellow", ["h-96", "v-134.4", "h-96"]],
+    ["ldr1:VCC", "esp:5V", "red", ["v19.2", "h-384"]],
+    ["ldr1:GND", "esp:GND.1", "black", ["v48", "h-326"]],
+    ["ldr1:AO", "esp:33", "cyan", ["v57.6", "h-248.9"]],
+    ["chip2:VCC", "esp:3V3", "red", ["h-57.6", "v-96"]]
   ],
   "dependencies": {}
 }

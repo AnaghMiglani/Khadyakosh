@@ -175,7 +175,7 @@ const Compost = () => {
             stroke: "#ef4444",
           },
         ].map(({ title, value, type, suggestions, stroke }) => {
-          const { color, label, icon } = getStatusInfo(type as any, value);
+          const { color, label } = getStatusInfo(type as any, value);
           const displaySuggestions = value === 0 ? ["N/A"] : suggestions;
           return (
             <Card
@@ -184,17 +184,7 @@ const Compost = () => {
               value={value ?? "N/A"}
               statusColor={color}
               suggestions={displaySuggestions}
-              statusLabel={
-                <div className="flex items-center gap-2 text-sm justify-center">
-                  <span
-                    className="inline-flex items-center gap-1 bg-opacity-10 px-2 py-1 rounded-full"
-                    style={{ backgroundColor: color }}
-                  >
-                    <span style={{ color }}>{icon}</span>
-                    <span className="text-gray-800 font-medium">{label}</span>
-                  </span>
-                </div>
-              }
+              statusLabel={label}
             >
               <div className="w-full h-48">
                 <LineChartComponent

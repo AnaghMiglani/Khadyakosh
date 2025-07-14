@@ -28,6 +28,8 @@ const Card: React.FC<CardProps> = ({
             {title === "Gas Level" && " ppm"}
     {title === "Humidity" && " %"}
     {title === "Temperature" && " °C"}
+    {title === "Soil Moisture" && " %"}
+    {title === "Light Intensity" && " lux"}
 
             </span>
           </span>
@@ -37,11 +39,14 @@ const Card: React.FC<CardProps> = ({
           ></div>
 
           {/* Tooltip */}
-          <div className="absolute top-4 right-0  text-white text-xs px-2 py-1 rounded-md opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-10 flex justify-center items-center">
-            <div>
-            {statusLabel}
+          <div className={`absolute bottom-full right-0 mb-2 translate-x-1/2 text-black text-xs px-2 py-1 rounded-md opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-10 border shadow-lg font-bold`}
+          style={{color:statusColor, borderColor:statusColor}}
+          > 
 
-            </div>
+
+    {statusLabel}
+  
+
           </div>
         </div>
       </div>

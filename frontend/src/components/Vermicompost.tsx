@@ -14,13 +14,20 @@ type SensorEntry = {
   gas: number;
   humidity: number;
   temperature: number;
+  soil: number;
+  light: number;
 };
+
+
+
 
 const Vermicompost = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<Error | null>(null);
   const { user } = useAuth();
   const [history, setHistory] = useState<SensorEntry[]>([]);
+
+
 
   useEffect(() => {
     if (!user) return;
@@ -38,6 +45,8 @@ const Vermicompost = () => {
             gas: value.gas,
             humidity: value.humidity,
             temperature: value.temperature,
+            soil : value.soil,
+            light: value.light
           };
 
           setHistory((prev) => [...prev.slice(-10), entry]);
@@ -60,10 +69,12 @@ const Vermicompost = () => {
     gas: 0,
     humidity: 0,
     temperature: 0,
+    soil:0,
+    light:0
   };
 
   const getStatusInfo = (
-    type: "gas" | "humidity" | "temperature",
+    type: "gas" | "humidity" | "temperature" | "soil" | "light",
     value: number
   ) => {
     if (type === "gas") {
@@ -77,7 +88,7 @@ const Vermicompost = () => {
         };
       return { color: "#ef4444", label: "High", icon: <FiActivity /> };
     }
-
+  
     if (type === "humidity") {
       if (value < 40)
         return { color: "#eab308", label: "Low", icon: <FiAlertTriangle /> };
@@ -85,7 +96,7 @@ const Vermicompost = () => {
         return { color: "#22c55e", label: "Optimal", icon: <FiCheckCircle /> };
       return { color: "#ef4444", label: "High", icon: <FiActivity /> };
     }
-
+  
     if (type === "temperature") {
       if (value < 35)
         return { color: "#3b82f6", label: "Cool", icon: <FiAlertTriangle /> };
@@ -93,9 +104,26 @@ const Vermicompost = () => {
         return { color: "#22c55e", label: "Ideal", icon: <FiCheckCircle /> };
       return { color: "#ef4444", label: "Hot", icon: <FiActivity /> };
     }
-
+  
+    if (type === "soil") {
+      if (value < 30)
+        return { color: "#eab308", label: "Dry", icon: <FiAlertTriangle /> };
+      if (value <= 60)
+        return { color: "#22c55e", label: "Moist", icon: <FiCheckCircle /> };
+      return { color: "#ef4444", label: "Too Wet", icon: <FiActivity /> };
+    }
+  
+    if (type === "light") {
+      if (value < 100)
+        return { color: "#22c55e", label: "Low (Good)", icon: <FiCheckCircle /> };
+      if (value <= 300)
+        return { color: "#eab308", label: "Moderate", icon: <FiAlertTriangle /> };
+      return { color: "#ef4444", label: "Too Bright", icon: <FiActivity /> };
+    }
+  
     return { color: "#6b7280", label: "Unknown", icon: null };
   };
+  
 
   const formatTimestamp = (timestamp: number) => {
     if (!timestamp) return "N/A";
@@ -109,6 +137,58 @@ const Vermicompost = () => {
       timeZone: "Asia/Kolkata",
     }).format(new Date(timestamp));
   };
+  
+  const cardData =[
+    {
+      title: "Gas Level",
+      value: latest.gas,
+      type: "gas",
+      suggestions: [
+        "Increase aeration",
+        "Check for odor",
+        "Turn compost pile",
+      ],
+      stroke: "#2260c5",
+    },
+    {
+      title: "Humidity",
+      value: latest.humidity,
+      type: "humidity",
+      suggestions: [
+        "Add dry material",
+        "Check water content",
+        "Cover compost bin",
+      ],
+      stroke: "#3b82f6",
+    },
+    {
+      title: "Temperature",
+      value: latest.temperature,
+      type: "temperature",
+      suggestions: ["Insulate bin", "Turn pile often", "Monitor daily"],
+      stroke: "#ef4444",
+    },{
+      title: "Soil Moisture",
+      value: latest.soil,
+      type: "soil",
+      suggestions: [
+        "Maintain damp, not wet, bedding",
+        "Sprinkle water if too dry",
+        "Add dry bedding if too wet"
+      ],
+      stroke: "#3b82f6",
+    },{
+      title: "Light Intensity",
+      value: latest.light,
+      type: "light",
+      suggestions: [
+        "Keep bin in a shaded area",
+        "Avoid direct sunlight",
+        "Use a breathable cover to block light"
+      ],
+      stroke: "#2260c5",
+    }
+  ]
 
   if (loading)
     return <div className="p-10 text-center">⏳ Loading real-time data...</div>;
@@ -144,38 +224,8 @@ const Vermicompost = () => {
 
       {/* Cards */}
       <div className="w-full max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {[
-          {
-            title: "Gas Level",
-            value: latest.gas,
-            type: "gas",
-            suggestions: [
-              "Increase aeration",
-              "Check for odor",
-              "Turn compost pile",
-            ],
-            stroke: "#2260c5",
-          },
-          {
-            title: "Humidity",
-            value: latest.humidity,
-            type: "humidity",
-            suggestions: [
-              "Add dry material",
-              "Check water content",
-              "Cover compost bin",
-            ],
-            stroke: "#3b82f6",
-          },
-          {
-            title: "Temperature",
-            value: latest.temperature,
-            type: "temperature",
-            suggestions: ["Insulate bin", "Turn pile often", "Monitor daily"],
-            stroke: "#ef4444",
-          },
-        ].map(({ title, value, type, suggestions, stroke }) => {
-          const { color, label, icon } = getStatusInfo(type as any, value);
+        {cardData.map(({ title, value, type, suggestions, stroke }) => {
+          const { color, label } = getStatusInfo(type as any, value);
           const displaySuggestions = value === 0 ? ["N/A"] : suggestions;
           return (
             <Card
@@ -185,15 +235,7 @@ const Vermicompost = () => {
               statusColor={color}
               suggestions={displaySuggestions}
               statusLabel={
-                <div className="flex items-center gap-2 text-sm justify-center">
-                  <span
-                    className="inline-flex items-center gap-1 bg-opacity-10 px-2 py-1 rounded-full"
-                    style={{ backgroundColor: color }}
-                  >
-                    <span style={{ color }}>{icon}</span>
-                    <span className="text-gray-800 font-medium">{label}</span>
-                  </span>
-                </div>
+                label
               }
             >
               <div className="w-full h-48">

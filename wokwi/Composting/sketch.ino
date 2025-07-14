@@ -1,20 +1,21 @@
 #include <DHT.h>
 #include <LiquidCrystal_I2C.h>
 
-#define DHTPIN 15       // Changed from 13 to 15 for Wokwi reliability
+#define DHTPIN 15
 #define DHTTYPE DHT22
 #define MQ135_PIN 4
 
 DHT dht(DHTPIN, DHTTYPE);
-LiquidCrystal_I2C lcd(0x3F, 20, 4);
+LiquidCrystal_I2C lcd(0x27, 20, 4);
+// LiquidCrystal_I2C lcd(0x3F, 20, 4);
 
 void setup() {
   Serial.begin(115200);
   dht.begin();
-  delay(2000); // Give time for sensor to initialize
+  delay(2000);
 
-  lcd.init();       
-  lcd.backlight();  
+  lcd.init();
+  lcd.backlight();
 
   lcd.setCursor(0, 0);
   lcd.print("Khadyakosh Ready");

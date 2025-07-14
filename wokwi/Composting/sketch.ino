@@ -7,7 +7,6 @@
 
 DHT dht(DHTPIN, DHTTYPE);
 LiquidCrystal_I2C lcd(0x27, 20, 4);
-// LiquidCrystal_I2C lcd(0x3F, 20, 4);
 
 void setup() {
   Serial.begin(115200);
@@ -38,22 +37,35 @@ void loop() {
   }
 
   lcd.setCursor(0, 0);
-  lcd.print("Temp: ");
+  lcd.print("Temp:");
   lcd.print(temp, 1);
-  lcd.print(" C   ");
+  lcd.print("C ");
+  if (temp < 35) lcd.print("Low ");
+  else if (temp > 65) lcd.print("High");
+  else lcd.print("OK  ");
 
   lcd.setCursor(0, 1);
-  lcd.print("Hum : ");
+  lcd.print("Hum :");
   lcd.print(hum, 1);
-  lcd.print(" %   ");
+  lcd.print("% ");
+  if (hum < 40) lcd.print("Low ");
+  else if (hum > 80) lcd.print("High");
+  else lcd.print("OK  ");
 
   lcd.setCursor(0, 2);
-  lcd.print("Gas : ");
+  lcd.print("Gas :");
   lcd.print(gasVoltage, 2);
-  lcd.print(" V   ");
+  lcd.print("V ");
+  if (gasVoltage < 1.2) lcd.print("Low ");
+  else if (gasVoltage > 2.2) lcd.print("High");
+  else lcd.print("OK  ");
 
   lcd.setCursor(0, 3);
-  if (temp > 40 || gasVoltage > 2.5) {
+  if (
+    temp < 35 || temp > 65 ||
+    hum < 40 || hum > 80 ||
+    gasVoltage > 2.5
+  ) {
     lcd.print("Status: ALERT     ");
   } else {
     lcd.print("Status: OK        ");
@@ -63,5 +75,5 @@ void loop() {
   Serial.print(" °C, Hum: "); Serial.print(hum);
   Serial.print(" %, Gas: "); Serial.print(gasVoltage); Serial.println(" V");
 
-  delay(2000);
+  delay(3000);
 }

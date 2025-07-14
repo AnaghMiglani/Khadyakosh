@@ -50,8 +50,13 @@
 
 <p> The current simulations displays gas sensor output in volts, representing raw analog readings. PPM conversion requires calibration with real sensors and is not shown here. </p>
 
----
 
+## 🎥 Demo Video
+Here’s a short demo covering both traditional and vermicomposting use cases:
+
+▶️ [Watch the Demo](https://drive.google.com/file/d/1lomxrIxDh68eYYbJlSyAqjMPxpgRut_l/view?usp=sharing)
+
+---
 
 ## 📡 IoT Integration
 
